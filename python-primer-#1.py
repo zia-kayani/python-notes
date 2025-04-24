@@ -125,3 +125,10 @@ print(staff)
 #replacing a value 
 staff["usman"] = "QA engineer"
 print(staff)
+
+staff1={
+    "test":"testing"
+}
+
+lll= staff+staff1   #we cant joint two maps 
+print(lll)
