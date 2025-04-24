@@ -130,5 +130,5 @@ staff1={
     "test":"testing"
 }
 
-lll= staff+staff1   #we cant joint two maps 
+lll= staff+staff1   #we cant joint two maps , this will generate an error
 print(lll)
