@@ -206,18 +206,8 @@ print(sorted(name))  #will show sorted characters in the string
 #Task :
 # have this string  "ziakayaniziakayaniziakayani"
 #outptut should be "["ziakayani" ,"ziakayni", "ziakayani"]"
-s = "ziakayaniziakayaniziakayani"
 
-parts = []
-i = 0
-while i < len(s):
-    if i + 9 <= len(s):
-        parts.append(s[i:i+9])
-        i += 9
-    else:
-        parts.append(s[i:])  # remaining last part
-        break
-
-print(parts)
-
-
+mystr="ziakayaniziakayaniziakayani"
+rep=mystr.count("ziakayani")
+newstr=["ziakayani"]*rep
+print(newstr) 
