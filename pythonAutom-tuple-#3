@@ -1,0 +1,81 @@
+#TUPLE DATA STRUCTURE OPERATIONS ----------------
+#tuples are defined with ()
+#tuples are used to store multiple items in signle variable 
+#tuples are immutable and  are more efficient then lists
+abd=(1,2,5)
+print(abd)
+print(type(abd))
+abd=(1)
+print(type(abd))  #if there is one value so type will be according to value
+abd=(1,)
+print(type(abd)) #now this will be tuple as more then one value 
+
+abd=(1,2,4,[4,5,8], 7) #tuple with list inside
+print(type(abd)) #will be tuple
+
+#slicing 
+abd=(1,2,4,[3,4,5],3,5)
+print(abd[1])
+print(abd[3][1]) #at index 3 there is list and at list 1 index vlaue is 4
+print(abd[3][0]) #should b 3
+
+# abd[1]=99 #will cause error as tuple are immutable
+# print(abd)
+
+abd[3][0]=44 #list is mutable means can be changed so 3 will e replcd with44
+print(abd)
+
+print(abd[:-1]) #will show items of tuple till last val not last val
+print(abd[:-2]) 
+print(abd[1:-1]) #from 1st to till las means not 1st and last values
+print(abd[2:4])  #from 2 index to 3rd index
+print(abd[::-1])  #reverse
+
+#interview
+print(bool(abd))
+print(bool(abd))
+
+#convert from list to tuple
+lis=[1,3,4,5]
+print(tuple(lis))
+
+#nested tuple
+abd=(1,2,4,5,6,[11,22,33],(44,55,66))
+print(abd[0])
+print(abd[5][1])
+print(abd[6][1]) 
+
+#del 
+# del abd[0]  #will cause error as tuple are immutable
+# print(abd)
+
+# del abd
+# print(abd) #cause an error
+
+#length
+print(len(abd))
+
+#count
+print(abd.count(2))
+
+#index  to find the index of value 
+abd=(1,2,4,5,6, 3,4,2)
+print(abd.index(1))
+print(abd.index(3))
+print(abd.index(2,1))
+print(abd.index(2,2)) #check 2 at second num repeating have which index
+
+#min max sum
+print(min(abd))
+print(max(abd))
+print(sum(abd))
+
+#concatination
+abd=(1,2,3)
+ad2=(4,5,9)
+cont=(abd ,ad2)
+print(cont)
+print(abd+ad2)
+
+#repeat
+print((abd,)*3)
