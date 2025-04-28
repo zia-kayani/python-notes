@@ -103,4 +103,25 @@ print(mylist[2])
 #in linux
 #uname -a | awk '{print $3}'
 
+#here is the acutal code for task
+#with linux 
+import os
+#myvar= os.popen("cat /etc/os-release | grep -iw 'version'| awk -F= '{print $2}' ").read()
+#print(myvar)
+
+#with python
+import os
+
+myversion = os.popen("cat /etc/os-release").read()
+mylist = myversion.split()
+
+# print(mylist)
+myfind = (mylist[8:10])
+convert_string = " ".join(myfind)
+# print(convert_string)
+
+myversion = (convert_string.strip('"'))
+print(f"My OS version is : {myversion}")
+
+
 
