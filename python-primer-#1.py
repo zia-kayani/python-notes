@@ -132,19 +132,3 @@ staff1={
 
 lll= staff+staff1   #we cant joint two maps , this will generate an error
 print(lll)
-
-#classes and objects -----------------------------------------------------------
-class things:
-    pass
-class inanimate(things):
-    pass
-class animate(things):
-    pass
-class animals(animate):
-    pass
-class mammels(animals):
-    pass
-class girrafe(mammels):
-    pass
-
-myobj= animals()  #object 
