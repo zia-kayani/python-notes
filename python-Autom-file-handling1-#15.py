@@ -135,4 +135,66 @@ print(f"Total we have 3 fruits with 1 price and fruits name is  {newlist[0]} {ne
     
 
 
+###########################
+import json
 
+jsonfile=r"E:\Web Development\python learning\fruits.json"
+
+with open(jsonfile,"r") as jf:
+    my_dict= json.load(jf)
+#print(my_dict)
+
+mydata=[]
+for i in my_dict:
+    if i['price'] >=1:
+        total_count=(len(i.keys()))
+        mydata.append(i['name'])
+print(mydata)
+print(total_count)
+
+
+
+
+# ------ File handling with csv  -------- 
+mypath = 'E:\Web Development\python learning\servershealth.csv'
+with open(mypath , 'r') as detailsfile:
+    data = detailsfile.read()
+    print(data)
+
+#OR
+with open(mypath,"r") as datafile:
+    data=datafile.readlines()
+    print(data)
+
+#or
+with open(mypath,"r") as datafile:
+    data=datafile.readlines()
+
+for i in data:
+    print(i)
+
+#or
+with open(mypath,"r") as datafile:
+    data=datafile.readlines()
+
+for i in data:
+    print(i.strip("\n"))
+
+#OR
+with open(mypath,"r") as datafile:
+    data=datafile.readlines()
+
+for i in data:
+    print(i.strip("\n").split())
+
+
+########
+import csv
+with open(mypath) as datafile:
+    data=csv.reader(datafile)
+    print(data)
+
+with open(mypath) as datafile:
+    data=csv.reader(datafile)
+    for each in data:
+        print(each)
