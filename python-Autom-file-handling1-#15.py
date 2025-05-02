@@ -306,7 +306,7 @@ import csv
 mypath =  "E:\Web Development\python learning\servershealth.csv"
 with open(mypath) as f:
     data = csv.reader(f)
-    next(data)
+    next(data) 
     for row in data:
         if row:
             try:
