@@ -198,3 +198,131 @@ with open(mypath) as datafile:
     data=csv.reader(datafile)
     for each in data:
         print(each)
+
+
+
+#---csv file writing ------
+import csv
+filepath = 'E:\Web Development\python learning\servershealth.csv'
+mylist=[12,'10.226.17.108','RHEL','d6:60:7b:6e:f6:9c','10 GB']
+with open(filepath , 'a') as datafile:
+    data_write = csv.writer(datafile)
+    data_write.writerow(mylist)
+
+#another exmple 
+# import csv 
+# mylist = [1, 'zia', 'kiani', 'kashmir']
+# mylist2 = [2, 'ali', 'shekhani', 'pakistan']
+# with open('myfile.csv' , 'a') as newfile:
+#     data_write_file = csv.writer(newfile)
+#     data_write_file.writerow(mylist)
+#     data_write_file.writerow(mylist2)
+
+
+#writerow vs writerows 
+
+#writerow 
+mylist=[1,'Abdeali','Dodiya','Bangalore']
+mylist2=[2,'Ali','Dodia','Surat']
+myfinal=[[1,'Abdeali','Dodiya','Bangalore'] ,[2,'Ali','Dodia','Surat']]
+with open('myfile.csv' , 'w' , newline='') as file:
+    data_write =  csv.writer(file)
+    data_write.writerow(myfinal)
+#output:-     not good
+# "[1, 'Abdeali', 'Dodiya', 'Bangalore']","[2, 'Ali', 'Dodia', 'Surat']" 
+
+
+#writerows
+mylist=[1,'Abdeali','Dodiya','Bangalore']
+mylist2=[2,'Ali','Dodia','Surat']
+myfinal=[[1,'Abdeali','Dodiya','Bangalore'] ,[2,'Ali','Dodia','Surat']]
+with open('myfile.csv' , 'w', newline='') as newfile:
+    data_write_file =  csv.writer(newfile)
+    data_write_file.writerows(myfinal)
+#o/p:-
+# 1,Abdeali,Dodiya,Bangalore
+# 2,Ali,Dodia,Surat
+
+with open('myfile.csv') as datafile:
+    data=csv.reader(datafile)
+    for each in data:
+        print(each)
+
+with open('myfile.csv') as datafile:
+    data = csv.reader(datafile)
+    data = list(data)
+    print(data[0])
+
+#to read the header of file 
+with open('data.csv') as df:
+    data =  csv.reader(df)
+    header = next(data)
+    print(header)
+
+#to read csv file without header 
+with open('data.csv') as df:
+    data =  csv.reader(df)
+    header = next(data)
+    print(header)
+
+    for i in data:
+        print(i)
+
+#i want to display only RHEL details
+mypath =  "E:\Web Development\python learning\servershealth.csv"
+
+mydata=[]
+with open(mypath) as datafile:
+    data=csv.reader(datafile)
+    header=next(data)
+    for each in data:
+        if each[2] == 'RHEL':
+            mydata.append(each)
+
+print("#################")
+print(mydata)
+
+
+#now i want to store my data into csv file 
+import csv
+mypath =  "E:\Web Development\python learning\servershealth.csv"
+mydata=[]
+
+with open(mypath ) as df:
+    data = csv.reader(df)
+    for each in data:
+        if each[2] == 'RHEL':
+            mydata.append(each)
+print(mydata)
+with open('servershealth.csv', 'w' ,newline='') as df:
+    data = csv.writer(df)
+    data.writerow(header)
+    data.writerows(mydata)
+
+#Task time --------------
+#I want to display serverlist whos less than 10 GB available memrory in mention CSV file.
+print("################################")
+import csv
+mypath =  "E:\Web Development\python learning\servershealth.csv"
+with open(mypath) as f:
+    data = csv.reader(f)
+    next(data)
+    for row in data:
+        if row:
+            try:
+                val =  int(row[4].strip().split()[0])
+                print()
+                if val < 10:
+                    print(row)
+            except (IndexError , ValueError):
+                continue
+        
+#Task -- #I want to disaply IP address only which belong to RHEL OS .
+import csv
+mypath =  "E:\Web Development\python learning\servershealth.csv"
+with open(mypath ) as f:
+    data = csv.reader(f)
+    for d in data:
+        if d:
+            if d[2] == 'RHEL':
+                print(d[1])
