@@ -147,3 +147,117 @@ print(pattern , myword)
 
 pattern = "\\n"
 print(pattern , myword)
+
+
+#######################################
+#will find the exact word  \\b___\\b
+pattern = r"\\bpython\\b"
+print(re.findall(pattern, myword))
+
+#match the n no of repeatitions
+myword="Abdeali Dodiya from bangalore , We are learning python and in this course we will " \
+"learn two version such python2 and python3, We will learn Python selenium in this coursesss"
+pattern=r"\bcoursesss\b"
+print(re.findall(pattern , myword))
+
+import re
+myword="Abd$%*eal2@1i Dodiya from bangalore , Python is very good language abdealipython@gmail.com We are learning python and in this course we will learn two version such python2 and python3, We will learn Python selenium in this coursesss"
+pattern=r"\bcourses{3}\b"
+print(re.findall(pattern,myword))
+
+
+pattern=r"\bpython\b"
+print(re.findall(pattern,myword))
+
+pattern=r"\bpython\d\b"
+print(re.findall(pattern,myword))
+
+##
+import re
+mytext="My jboss server ip address is 192.168.1.8 \nMy Docker server ip address is 192.168.1.11"
+print(mytext)
+
+#to find the ip 
+pattern="\d\d\d.\d\d\d.\d.\d\d"
+print(re.findall(pattern ,  mytext))
+
+pattern="\d\d\d.\d\d\d.\d.\d"
+print(re.findall(pattern ,  mytext))
+
+# 1 time or two time or three time 
+pattern = "\d{3}.\d{3}.\d{1}.\d{1}"
+print(re.findall(pattern, mytext))
+
+pattern = "\d{3}.\d{3}.\d{1}.\d{2}"
+print(re.findall(pattern, mytext))
+
+mytext="My jboss server ip address is 192.168.1.8 \nMy Docker server ip address is 192.168.1.11 \n My broadcast addres is 255.255.255.255"
+pattern=r"\d{1,3}.\d{1,3}.\d{1,3}.\d{1,3}"
+print(re.findall(pattern,mytext))
+
+import re
+mytext="My jboss server ip address is 192.168.1.8 \nMy Docker server ip address is 192.168.1.11 \n My broadcast addres is 255.255.255.255 \n My invalid address 192.168.1234.12345"
+pattern=r"\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}"
+print(re.findall(pattern,mytext))
+
+#{1,} one or more times 
+pattern=r"\d{1,}\.\d{1,}\.\d{1,}\.\d{1,}"
+print(re.findall(pattern,mytext))
+
+# + --> same as {1,} one or more times 
+import re
+pattern=r"\d+\.\d+\.\d+\.\d+"
+print(re.findall(pattern,mytext))
+
+#will also show invlid ip addresses
+import re
+mytext="My jboss server ip address is 192.168.1.8 \nMy Docker server ip address" \
+" is 192.168.1.11 \n My broadcast addres is 255.255.255.255 \n My invalid address " \
+"192.168.1234.12345 \n my invalid address is 0..12.34"
+pattern=r"\d+\.\d+\.\d+\.\d+"
+print(re.findall(pattern,mytext))
+
+# * ---> 0 or more times 
+pattern=r"\d*\.\d*\.\d*\.\d*"
+print(re.findall(pattern,mytext))
+
+# ? --> 0 times or none times 
+pattern=r"\d?\.\d?\.\d?\.\d?"
+print(re.findall(pattern,mytext))
+
+###################
+import re
+myword="Abd$%*eal2@1i Dodiya from bangalore , Python is very good language" \
+" abdealipython@gmail.com We are learning python and in this course we will " \
+"learn two version such Python2 and python3, We will learn Python selenium in this coursesss"
+pattern=r"\bpython\d\b"
+print(re.findall(pattern,myword))
+
+#now this will ignore case insansetiveness
+pattern=r"\bPython\d\b"
+print(re.findall(pattern,myword,re.I))
+#OR we can use this syntext
+# print(re.findall(pattern,myword,re.IGNORECASE))
+
+############
+re.M
+
+import re
+mytext="""My jboss server ip address is 192.168.1.8 
+My Docker server ip address is 192.168.1.11 
+My broadcast addres is 255.255.255.255 
+My invalid address 192.168.1234.12345 
+my invalid address is 0..1.3
+"""
+pattern=r"^My" #will match My at start of string but on one line
+print(re.findall(pattern,mytext))
+
+pattern=r"^My"
+print(re.findall(pattern,mytext,re.M)) #will match My at start of string but from many lines
+#OR we can use 
+pattern=r"^My"
+# print(re.findall(pattern,mytext,re.MULTILINE))
+
+#If you want to use multiline and ignorecase same pattern then you can use | sigh in your findall arguments 
+pattern=r"^My"
+print(re.findall(pattern,mytext,re.M|re.I))
