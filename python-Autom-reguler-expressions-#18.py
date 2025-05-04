@@ -347,3 +347,73 @@ import re
 abd="ABDEALI"
 pattern=r"[A-Z]"
 print(re.search(pattern,abd))
+
+###############################
+#findall()  will match from whole string all matching values
+#search() will match from first line of string but first matching value
+#match() will find and match the value from string at start of line  or index
+
+import re
+mytext="My 192.168.1.8 jboss server ip address is  \nMy Docker server ip address is 192.168.1.11 \n My broadcast addres is 255.255.255.255 \n My invalid address 192.168.1234.12345"
+pattern=r"\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}"
+myfind=(re.findall(pattern,mytext))
+print(myfind)
+
+#with search
+myfind=(re.search(pattern,mytext))
+print(myfind)
+
+#now with match
+import re
+mytext="My 192.168.1.8 jboss server ip address is  \nMy Docker server ip address is 192.168.1.11 \n My broadcast addres is 255.255.255.255 \n My invalid address 192.168.1234.12345"
+pattern=r"\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}"
+myfind=(re.findall(pattern,mytext))
+print(myfind)
+
+#now with match
+myfind=(re.match(pattern,mytext))
+print(myfind) #none will be returned becuase no matching ip at start of string
+
+import re
+mytext="192.168.1.8 My jboss server ip address is "
+pattern=r"\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}"
+print(re.match(pattern,mytext))  #now ip is returned in the output
+#as this is object 
+
+
+#-------------- split() method -----------
+#split method is used to split the string with certain pattern 
+mytext="192.168.1.8 jboss server ip address is  \nMy Docker server ip address is 192.168.1.11 \n My broadcast addres is 255.255.255.255 \n My invalid address 192.168.1234.12345"
+pattern=r"\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}"
+mymatch = (re.split(pattern , mytext))
+print(mymatch)
+for i in mymatch:
+    print(i)
+
+# ------------ sub() --------------
+#it will replace the value from your string 
+
+import re
+myword= "Abdeali Dodiya from bangalore, We are leaning python course " \
+"and in this python course will lear two version like python2 and python3 course"
+pattern=r"\bcourse\b"
+print(re.sub(pattern,'COURSE',myword))
+
+# -  - ------subn() ---------
+#same as sub method but also returns no of substitutions
+print(re.subn(pattern, "COURSE", myword))
+
+#---------------------------
+# Task time :-
+
+
+# myword="""
+# We have example of email address finder 
+# abdealidodia@gmail.com
+# abdeali@gmail.com
+# xyz.com
+# ABDEALi@gmail.com
+# ABd@yahoo.com
+# """
+# You need to find out correct email address from your string 
+pattern = r"[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}"
