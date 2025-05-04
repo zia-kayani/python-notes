@@ -261,3 +261,89 @@ pattern=r"^My"
 #If you want to use multiline and ignorecase same pattern then you can use | sigh in your findall arguments 
 pattern=r"^My"
 print(re.findall(pattern,mytext,re.M|re.I))
+
+###############
+print(len(re.findall(pattern,mytext)))
+
+#finiter  -- returns the iterable 
+import re
+mytext="My jboss server ip address is 192.168.1.8 \nMy Docker server ip address is 192.168.1.11 \n My broadcast addres is 255.255.255.255 \n My invalid address 192.168.1234.12345"
+pattern=r"\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}"
+print(re.findall(pattern,mytext))
+print(re.finditer(pattern,mytext))
+
+print("#########")
+pattern=r"\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}"
+myiter=(re.finditer(pattern,mytext))
+print(myiter)
+for i in myiter:
+    print(i)
+
+
+print(type(myiter))  #callable iterator 
+
+#to show only the matched value from iterator
+pattern=r"\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}"
+myiter = (re.finditer(pattern , mytext))
+for i in myiter:
+    print("My matching string is ", i.group())
+
+
+
+# ----------- re.compile() method ---
+#this is used to compile the reguler expression for reuse
+#like we used to do 
+import re
+mytext="We are learning python automation course, In devops course python is very important"
+pattern = r"\bpython\b"
+print(type(pattern))  #type will be kind of str
+print(re.findall(pattern ,  mytext))
+
+#but we can use
+pattern = re.compile("python")
+print(type(pattern))   #type willl be re.pattern
+print(re.findall(pattern ,mytext))
+
+
+# ---- search()  methodd ----------------
+#alternative to findall method , but give first matched result
+#in the form of object
+
+import re
+mytext="My 192.168.1.8 jboss server ip address is  \nMy Docker server ip address is 192.168.1.11 \n My broadcast addres is 255.255.255.255 \n My invalid address 192.168.1234.12345"
+pattern=r"\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}"
+myfind=(re.findall(pattern,mytext))
+print(myfind)
+
+#now with search we can do the same 
+import re
+mytext="My 192.168.1.8 jboss server ip address is  \nMy Docker server ip address is 192.168.1.11 \n My broadcast addres is 255.255.255.255 \n My invalid address 192.168.1234.12345"
+pattern=r"\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}"
+myfind=(re.search(pattern,mytext))
+print(myfind)
+
+
+print("we found from string" , myfind)
+print("we found from string" , myfind.group())
+print("starting index " , myfind.start())
+print("ending index ", myfind.end())
+print("search length is ", myfind.end() - myfind.start() )
+
+# pattern=r"ABD\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}"
+# myfind=(re.search(pattern,mytext))
+# print('We are found some string from pattern',myfind)
+# print('We are found some string from pattern', myfind.group())  #will cause an error
+
+###################
+#You can find character string more than 7 to 8 character 
+import re
+abd="Abdeali"
+pattern=r".{7,}"
+print(re.search(pattern,abd))
+
+
+#You can check whether your string is upper case or not 
+import re
+abd="ABDEALI"
+pattern=r"[A-Z]"
+print(re.search(pattern,abd))
