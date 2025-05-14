@@ -127,4 +127,64 @@ mydb.close()
 
 
 
+#now -to fix the error 
+#login to mysql with root 
+## create mysql_user then you can access from myscript 
+create user 'mysql_user'@'%'IDENTIFIED BY 'test123';
+
+#now when you login with this user, will not be allowed
+root@abdeali:~/lect55# mysql -u mysql_user -p
+Enter password:
+ERROR 1045 (28000): Access denied for user 'mysql_user'@'localhost' (using password: YES)
+ 
+ #with ip address , we are allowd - means with localhost its not allowing
+ root@abdeali:~/lect55# mysql -u mysql_user  -h 192.168.75.63  -p
+Enter password:
+Welcome to the MySQL monitor.
+
+#now you need to open one file and edit with below line 
+
+vim /etc/mysql/mysql.conf.d/mysqld.cnf
+bind-address            = localhost
+#you need to change value tih 0.0.0.0
+
+bind-address            = 0.0.0.0
+
+:wq!
+
+#now systemctl restart mysql
+
+#now after creating the user run the programm
+import mysql.connector
+mydb= mysql.connector.connect(host="192.168.1.8",user="mysql_user",password="test123",database="alnafi")
+cur = mydb.cursor()
+sql = ''' select * from trainer_details '''
+cur.execute(sql)
+result = cur.fetch()
+mydb.close() 
+#You will get follow error --
+#mysql.connector.errors.ProgrammingError: 1044 (42000): 
+# Access denied for user 'mysql_user'@'%' to database 'alnafi'
+
+#means this user has no privilages to access the database 
+# Now we will provide fulll access to mysql_user - from root user
+mysql> grant all on *.* to 'mysql_user'@'%' WITH GRANT OPTION;
+
+#now user has privilages, we can even login
+mysql -u mysql_user -h 192.168.1.8 -p
+#can see all databases which were in root user  -- show databses;
+
+#now finally we can update our query - that will run successfull 
+import mysql.connector
+mydb= mysql.connector.connect(host="192.168.1.8",user="mysql_user",password="test123",database="alnafi")
+cur = mydb.cursor()
+sql = ''' select * from trainer_details '''
+cur.execute(sql)
+result = cur.fetchall()
+print(result)
+mydb.close()
+
+
+
+
 
