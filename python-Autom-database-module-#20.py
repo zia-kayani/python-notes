@@ -176,7 +176,7 @@ mysql -u mysql_user -h 192.168.1.8 -p
 
 #now finally we can update our query - that will run successfull 
 import mysql.connector
-mydb= mysql.connector.connect(host="192.168.1.8",user="mysql_user",password="test123",database="alnafi")
+mydb= mysql.connector.connect(host="192.168.75.63",user="mysql_user",password="test123",database="alnafi")
 cur = mydb.cursor()
 sql = ''' select * from trainer_details '''
 cur.execute(sql)
@@ -185,6 +185,120 @@ print(result)
 mydb.close()
 
 
+
+# -----------now remote data insertion ---------
+
+#to get user1 details - i am runnin all below from remote machine
+import mysql.connector
+mydb= mysql.connector.connect(host="192.168.75.63",user="mysql_user",password="test123",database="alnafi")
+cur = mydb.cursor()
+sql = ''' select * from trainer_details where t_id=1'''
+cur.execute(sql)
+result = cur.fetchall()  # fetchone() will fetch only frist record from table
+print(result)
+mydb.close()
+
+
+#fetching all the data 
+import mysql.connector
+mydb= mysql.connector.connect(host="192.168.75.63",user="mysql_user",password="test123",database="alnafi")
+cur = mydb.cursor()
+sql = ''' select * from trainer_details '''
+cur.execute(sql)
+result = cur.fetchall()  
+for i in result:
+    print(result)
+mydb.close()
+
+#data insertion 
+import mysql.connector
+mydb= mysql.connector.connect(host="192.168.75.63",user="mysql_user",password="test123",database="alnafi")
+cur = mydb.cursor()
+sql = """ insert into trainer_details (fname,lname,desig,username,password,salary,datetime) values ('Arwa','dodia','Blogger','arwa','arwa123',4000,'2022-10-02') """
+cur.execute(sql)
+mydb.commit()
+mydb.close()
+
+#now to insert dynamic data 
+import mysql.connector
+mydb= mysql.connector.connect(host="192.168.75.63",user="mysql_user",password="test123",database="alnafi")
+cur = mydb.cursor()
+sql = "insert into trainer_details (fname,lname,desig,username,password,salary,datetime) values (%s,%s,%s,%s,%s,%s,%s) "
+data = ('Zoya','Ukani','SME','zaoya','zoya123','8000','2022-10-02')
+cur.execute(sql,data)
+mydb.commit()
+mydb.close()
+
+
+#I want to insert data as datetime object via fix variable 
+import mysql.connector
+from datetime import *
+
+time =  datetime.now()
+mycustom = time.strftime("%Y-%m-%d %H:%M:%S")
+mydb= mysql.connector.connect(host="192.168.75.63",user="mysql_user",password="test123",database="alnafi")
+cur = mydb.cursor()
+sql = "insert into trainer_details (fname,lname,desig,username,password,salary,datetime) values (%s,%s,%s,%s,%s,%s,%s) "
+data = ('Ali','Patel','Devops','ali','ali123','7000',mycustom)
+cur.execute(sql,data)
+mydb.commit()
+mydb.close()
+
+#We are update data via python
+import mysql.connector
+from datetime import *
+
+time =  datetime.now()
+mycustom = time.strftime("%Y-%m-%d %H:%M:%S")
+mydb= mysql.connector.connect(host="192.168.75.63",user="mysql_user",password="test123",database="alnafi")
+cur = mydb.cursor()
+data="zoya"
+sql = " update trainer_details set username="+data+ " where t_id=6"
+cur.execute(sql)
+mydb.commit()
+mydb.close()  #this program will generate an error 
+#error will be like this : mysql.connector.errors.ProgrammingError: 1054 (42S22): Unknown column 'zoya' in 'field list'
+
+
+#to get rid of above error 
+import mysql.connector
+from datetime import *
+
+time =  datetime.now()
+mycustom = time.strftime("%Y-%m-%d %H:%M:%S")
+mydb= mysql.connector.connect(host="192.168.75.63",user="mysql_user",password="test123",database="alnafi")
+cur = mydb.cursor()
+data="'zoya'"
+sql = " update trainer_details set username="+data+ " where t_id=6"
+cur.execute(sql)
+mydb.commit()
+mydb.close()
+
+
+# Update data with select query 
+import mysql.connector
+from datetime import *
+
+time=datetime.now()
+mycustom = time.strftime("%Y-%m-%d %H:%M:%S")
+mydb= mysql.connector.connect(host="192.168.75.63",user="mysql_user",password="test123",database="alnafi")
+cur = mydb.cursor()
+data="'zoya@123'"
+sql = " update trainer_details set password="+data+ " where t_id=6"
+
+cur.execute(sql)
+mydb.commit()
+select_sql = """ select * from trainer_details """
+cur.execute(select_sql)
+result = cur.fetchall()
+for data in result:
+    print(data)
+
+mydb.close()
+
+
+#to delete data
+sql = " delete from trainer_details where fname="+mydata
 
 
 
