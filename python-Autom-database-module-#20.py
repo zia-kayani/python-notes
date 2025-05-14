@@ -105,6 +105,7 @@ desc trainer_details;
 
 
 #CODE
+#
 import mysql.connector
 mydb =  mysql.connector.connect(host='localhost',user='root',password='zia123',database='alnafi')
 #mysql connection object create
@@ -119,3 +120,11 @@ cur.execute(sql)
 result = cur.fetch()
 
 mydb.close()
+#in the above, script has no issue but there will be an error in the output while connecting to mysql
+# You will get below error 
+# mysql.connector.errors.ProgrammingError: 1698 (28000): Access denied for user 'root'@'localhost'
+
+
+
+
+
